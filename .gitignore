@@ -1,4 +1,4 @@
 *.o
 CocoaTwit
 Makefile
-moc_mainwindow.cpp
+moc_*.cpp
