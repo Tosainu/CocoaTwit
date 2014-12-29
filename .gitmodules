@@ -1,0 +1,3 @@
+[submodule "lib/twitpp"]
+	path = lib/twitpp
+	url = https://github.com/Tosainu/twitpp.git
