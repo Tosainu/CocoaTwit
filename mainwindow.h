@@ -10,6 +10,11 @@ public:
   MainWindow();
   ~MainWindow();
 
+private:
+  void createActions();
+  void createMenus();
+  void createWidgets();
+
 private slots:
   void showAuthDialog();
   void about();
@@ -18,9 +23,6 @@ private slots:
   void authFailure();
 
 private:
-  void createActions();
-  void createMenus();
-
   QMenu* accountMenu;
   QAction* addAccountAct;
 
