@@ -1,6 +1,7 @@
 #include <QMainWindow>
 #include <QtWidgets>
 #include <memory>
+#include "streaming_thread.h"
 #include "./lib/twitpp/oauth/account.h"
 
 class MainWindow : public QMainWindow {

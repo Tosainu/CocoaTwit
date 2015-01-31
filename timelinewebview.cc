@@ -1,3 +1,4 @@
+#include <QDebug>
 #include "timelinewebview.h"
 
 static const QString timelineHtml(R"(
@@ -73,6 +74,8 @@ small {
 .avatar {
   float: left;
   margin-left: -58px;
+  width: 48px;
+  height: 48px;
 }
 .tweet-text {
   display: block;
@@ -98,52 +101,6 @@ small {
         <h1>Home</h1>
       </header>
       <div class="timeline">
-
-        <div class="tweet">
-          <div class="tweet-content">
-            <header class="tweet-header">
-              <img src="http://www.gravatar.com/avatar/a8648d613afd1ec0c84bb04973c98ad2.png?s=48" alt="" class="avatar">
-              <p>とさいぬ <small>@myon___</small></p>
-            </header>
-            <div class="tweet-text">
-              <p>aaaaaaaaa<br>aaaaaaaaaaaaaaaa<br>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-            </div>
-          </div>
-          <div class="action">
-            <button>Fav</button> <button>RT</button>
-          </div>
-        </div> <!-- .tweet -->
-
-        <div class="tweet">
-          <div class="tweet-content">
-            <header class="tweet-header">
-              <img src="http://www.gravatar.com/avatar/a8648d613afd1ec0c84bb04973c98ad2.png?s=48" alt="" class="avatar">
-              <p>とさいぬ <small>@myon___</small></p>
-            </header>
-            <div class="tweet-text">
-              <p>aaaaaaaaa<br>aaaaaaaaaaaaaaaa<br>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-            </div>
-          </div>
-          <div class="action">
-            <button>Fav</button> <button>RT</button>
-          </div>
-        </div> <!-- .tweet -->
-
-        <div class="tweet">
-          <div class="tweet-content">
-            <header class="tweet-header">
-              <img src="http://www.gravatar.com/avatar/a8648d613afd1ec0c84bb04973c98ad2.png?s=48" alt="" class="avatar">
-              <p>とさいぬ <small>@myon___</small></p>
-            </header>
-            <div class="tweet-text">
-              <p>aaaaaaaaa<br>aaaaaaaaaaaaaaaa<br>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-            </div>
-          </div>
-          <div class="action">
-            <button>Fav</button> <button>RT</button>
-          </div>
-        </div> <!-- .tweet -->
-
       </div> <!-- timeline -->
     </div> <!-- column -->
   </body>
@@ -155,3 +112,23 @@ TimelineWebView::TimelineWebView(QWidget* parent) : QWebView(parent) {
 }
 
 TimelineWebView::~TimelineWebView() {}
+
+void TimelineWebView::addItem(QVariantMap item) {
+  auto timeline = this->page()->mainFrame()->findFirstElement("div.timeline");
+  timeline.prependInside(R"(
+    <div class="tweet">
+      <div class="tweet-content">
+        <header class="tweet-header">
+          <img src=")" +
+            item["user"].toMap()["profile_image_url_https"].toString() + R"(" alt="" class="avatar">
+          <p>)" +
+            item["user"].toMap()["name"].toString() + " <small>@" +
+            item["user"].toMap()["screen_name"].toString() + R"(</small></p>
+        </header>
+        <div class="tweet-text"><p>)" +
+          item["text"].toString() + R"(</p>
+        </div>
+      </div>
+      <div class="action"></div>
+    </div>)");
+}

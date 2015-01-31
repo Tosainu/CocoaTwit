@@ -53,8 +53,9 @@ void MainWindow::showAuthDialog() {
 }
 
 void MainWindow::authSuccess() {
-  qDebug() << "AccessToken:\t" << QString::fromStdString(account->oauth_token());
-  qDebug() << "AccessSecret:\t" << QString::fromStdString(account->oauth_token_secret());
+  auto streaming = new StreamingThread(account);
+  connect(streaming, SIGNAL(tweet(QVariantMap)), this->centralWidget(), SLOT(addItem(QVariantMap)));
+  streaming->start();
 }
 
 void MainWindow::authFailure() {

@@ -7,12 +7,14 @@ INCLUDEPATH += .
 HEADERS += \
   mainwindow.h \
   auth_dialog.h \
+  streaming_thread.h \
   timelinewebview.h
 
 SOURCES += \
   main.cc \
   mainwindow.cc \
   auth_dialog.cc \
+  streaming_thread.cc \
   timelinewebview.cc \
   lib/twitpp/net/async_client.cc \
   lib/twitpp/net/client.cc \
