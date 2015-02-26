@@ -8,7 +8,8 @@ HEADERS += \
   mainwindow.h \
   auth_dialog.h \
   streaming_thread.h \
-  timelinewebview.h
+  timelinewebview.h \
+  tweet_dialog.h
 
 SOURCES += \
   main.cc \
@@ -16,6 +17,7 @@ SOURCES += \
   auth_dialog.cc \
   streaming_thread.cc \
   timelinewebview.cc \
+  tweet_dialog.cc \
   lib/twitpp/net/async_client.cc \
   lib/twitpp/net/client.cc \
   lib/twitpp/oauth/account.cc \

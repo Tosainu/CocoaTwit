@@ -18,6 +18,7 @@ private:
 
 private slots:
   void showAuthDialog();
+  void showTweetDialog();
   void about();
 
   void authSuccess();
@@ -26,6 +27,7 @@ private slots:
 private:
   QMenu* accountMenu;
   QAction* addAccountAct;
+  QAction* tweetAct;
 
   QMenu* helpMenu;
   QAction* aboutAct;

@@ -3,6 +3,7 @@
 #include "mainwindow.h"
 #include "auth_dialog.h"
 #include "timelinewebview.h"
+#include "tweet_dialog.h"
 
 const std::string CK = "ywDt5KpeDYlO6vcYthEivwVWF";
 const std::string CS = "Co2OmGUoTQlFCQ2H5iarWfSQz3BJ2lqr9uIuSvyaLCI8bzdfNN";
@@ -20,6 +21,10 @@ void MainWindow::createActions() {
   addAccountAct->setStatusTip("Add new Twitter Account");
   connect(addAccountAct, SIGNAL(triggered()), this, SLOT(showAuthDialog()));
 
+  tweetAct = new QAction("&Tweet", this);
+  tweetAct->setStatusTip("Post new Tweet");
+  connect(tweetAct, SIGNAL(triggered()), this, SLOT(showTweetDialog()));
+
   aboutAct = new QAction("&About", this);
   aboutAct->setStatusTip("Show the application's info");
   connect(aboutAct, SIGNAL(triggered()), this, SLOT(about()));
@@ -28,6 +33,7 @@ void MainWindow::createActions() {
 void MainWindow::createMenus() {
   accountMenu = this->menuBar()->addMenu("&Account");
   accountMenu->addAction(addAccountAct);
+  accountMenu->addAction(tweetAct);
 
   helpMenu = this->menuBar()->addMenu("&Help");
   helpMenu->addAction(aboutAct);
@@ -43,13 +49,19 @@ void MainWindow::about() {
 }
 
 void MainWindow::showAuthDialog() {
-  AuthDialog* auth = new AuthDialog(account, this);
+  auto auth = new AuthDialog(account, this);
   auth->setModal(true);
 
   connect(auth, SIGNAL(success()), this, SLOT(authSuccess()));
   connect(auth, SIGNAL(failure()), this, SLOT(authFailure()));
 
   auth->exec();
+}
+
+void MainWindow::showTweetDialog() {
+  auto tweet = new TweetDialog(account, this);
+  tweet->setModal(true);
+  tweet->exec();
 }
 
 void MainWindow::authSuccess() {
