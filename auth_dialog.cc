@@ -35,8 +35,6 @@ AuthDialog::AuthDialog(const std::shared_ptr<twitpp::oauth::account> a, QWidget*
   this->setLayout(layout);
 }
 
-AuthDialog::~AuthDialog() {}
-
 void AuthDialog::authorize() {
   if (account->get_oauth_token(this->pin->text().toStdString())) {
     emit failure();

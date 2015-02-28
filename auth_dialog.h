@@ -11,7 +11,6 @@ class AuthDialog : public QDialog {
 
 public:
   AuthDialog(const std::shared_ptr<twitpp::oauth::account> a, QWidget* parent = 0);
-  ~AuthDialog();
 
 signals:
   void success();

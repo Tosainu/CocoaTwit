@@ -111,8 +111,6 @@ TimelineWebView::TimelineWebView(QWidget* parent) : QWebView(parent) {
   this->setHtml(timelineHtml);
 }
 
-TimelineWebView::~TimelineWebView() {}
-
 void TimelineWebView::setJsObj(JsObj* jsobj) {
   this->page()->mainFrame()->addToJavaScriptWindowObject("JsObj", jsobj);
 }

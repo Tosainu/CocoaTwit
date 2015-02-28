@@ -15,8 +15,6 @@ MainWindow::MainWindow() : account(std::make_shared<twitpp::oauth::account>(CK, 
   createWidgets();
 }
 
-MainWindow::~MainWindow() {}
-
 void MainWindow::createActions() {
   addAccountAct = new QAction("&Add Account", this);
   addAccountAct->setStatusTip("Add new Twitter Account");

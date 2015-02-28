@@ -7,8 +7,6 @@
 
 StreamingThread::StreamingThread(const std::shared_ptr<twitpp::oauth::account>& ap, QObject* parent) : QThread(parent), oauth(*ap) {}
 
-StreamingThread::~StreamingThread() {}
-
 void StreamingThread::run() {
   oauth.stream_get("https://userstream.twitter.com/1.1/user.json", [&](twitpp::net::response& response) {
     if (response.status_code != 200) {

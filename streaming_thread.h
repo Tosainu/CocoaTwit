@@ -11,12 +11,7 @@ class StreamingThread : public QThread {
   Q_OBJECT
 
 public:
-  // template! template!! template!!!
-  // template <class AccountPtr>
-  // StreamingThread(const AccountPtr& ap, QObject* parent = 0);
-
   StreamingThread(const std::shared_ptr<twitpp::oauth::account>& ap, QObject* parent = 0);
-  ~StreamingThread();
 
 protected:
   virtual void run();

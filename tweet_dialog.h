@@ -12,7 +12,6 @@ class TweetDialog : public QDialog {
 
 public:
   TweetDialog(const std::shared_ptr<twitpp::oauth::account> a, QWidget* parent = 0);
-  ~TweetDialog();
 
 private slots:
   void tweet();

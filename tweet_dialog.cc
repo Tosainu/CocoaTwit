@@ -18,8 +18,6 @@ TweetDialog::TweetDialog(const std::shared_ptr<twitpp::oauth::account> a, QWidge
   this->setLayout(layout);
 }
 
-TweetDialog::~TweetDialog() {}
-
 void TweetDialog::tweet() {
   auto res = client.post("https://api.twitter.com/1.1/statuses/update.json", {
       {"status", text->toPlainText().toUtf8().constData()}

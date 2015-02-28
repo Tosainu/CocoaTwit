@@ -10,7 +10,6 @@ class TimelineWebView : public QWebView {
 
 public:
   TimelineWebView(QWidget* parent = nullptr);
-  ~TimelineWebView();
 
   void setJsObj(JsObj* jsobj);
 
