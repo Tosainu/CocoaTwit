@@ -7,6 +7,7 @@ INCLUDEPATH += .
 HEADERS += \
   mainwindow.h \
   auth_dialog.h \
+  jsobj.h \
   streaming_thread.h \
   timelinewebview.h \
   tweet_dialog.h
@@ -15,6 +16,7 @@ SOURCES += \
   main.cc \
   mainwindow.cc \
   auth_dialog.cc \
+  jsobj.cc \
   streaming_thread.cc \
   timelinewebview.cc \
   tweet_dialog.cc \

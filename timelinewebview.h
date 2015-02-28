@@ -3,6 +3,7 @@
 
 #include <QtWebKitWidgets>
 #include <QVariantMap>
+#include "jsobj.h"
 
 class TimelineWebView : public QWebView {
   Q_OBJECT
@@ -10,6 +11,8 @@ class TimelineWebView : public QWebView {
 public:
   TimelineWebView(QWidget* parent = nullptr);
   ~TimelineWebView();
+
+  void setJsObj(JsObj* jsobj);
 
 public slots:
   void addItem(QVariantMap item);

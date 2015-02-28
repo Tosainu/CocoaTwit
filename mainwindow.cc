@@ -4,6 +4,7 @@
 #include "auth_dialog.h"
 #include "timelinewebview.h"
 #include "tweet_dialog.h"
+#include "jsobj.h"
 
 const std::string CK = "ywDt5KpeDYlO6vcYthEivwVWF";
 const std::string CS = "Co2OmGUoTQlFCQ2H5iarWfSQz3BJ2lqr9uIuSvyaLCI8bzdfNN";
@@ -65,6 +66,8 @@ void MainWindow::showTweetDialog() {
 }
 
 void MainWindow::authSuccess() {
+  static_cast<TimelineWebView*>(this->centralWidget())->setJsObj(new JsObj(account, this));
+
   auto streaming = new StreamingThread(account);
   connect(streaming, SIGNAL(tweet(QVariantMap)), this->centralWidget(), SLOT(addItem(QVariantMap)));
   streaming->start();

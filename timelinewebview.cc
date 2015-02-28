@@ -113,22 +113,31 @@ TimelineWebView::TimelineWebView(QWidget* parent) : QWebView(parent) {
 
 TimelineWebView::~TimelineWebView() {}
 
+void TimelineWebView::setJsObj(JsObj* jsobj) {
+  this->page()->mainFrame()->addToJavaScriptWindowObject("JsObj", jsobj);
+}
+
 void TimelineWebView::addItem(QVariantMap item) {
+  auto id         = item["id_str"].toString();
+  auto imageUrl   = item["user"].toMap()["profile_image_url_https"].toString();
+  auto name       = item["user"].toMap()["name"].toString();
+  auto screenName = item["user"].toMap()["screen_name"].toString();
+  auto tweet      = item["text"].toString();
+
   auto timeline = this->page()->mainFrame()->findFirstElement("div.timeline");
   timeline.prependInside(R"(
     <div class="tweet">
       <div class="tweet-content">
         <header class="tweet-header">
-          <img src=")" +
-            item["user"].toMap()["profile_image_url_https"].toString() + R"(" alt="" class="avatar">
-          <p>)" +
-            item["user"].toMap()["name"].toString() + " <small>@" +
-            item["user"].toMap()["screen_name"].toString() + R"(</small></p>
+          <img src=")" + imageUrl + R"(" alt="" class="avatar">
+          <p>)" + name + " <small>@" + screenName + R"(</small></p>
         </header>
-        <div class="tweet-text"><p>)" +
-          item["text"].toString() + R"(</p>
+        <div class="tweet-text"><p>)" + tweet + R"(</p>
         </div>
       </div>
-      <div class="action"></div>
+      <div class="action">
+        <button onclick="JsObj.fav(')" + id + R"(');">Fav</button>
+        <button onclick="JsObj.rt(')" + id + R"(');">RT</button>
+      </div>
     </div>)");
 }
